@@ -44,5 +44,5 @@ editor SwitchProjectName
 
   with file when path = "resources/index.html"
 	  begin
-  	  do replace "ProjectName" project_name
+  	  do regexpReplace "<title>.*</title>" { "<title>" + project_name + "</title>"}
 		end
