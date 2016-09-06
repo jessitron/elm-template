@@ -1,0 +1,10 @@
+
+echo "Cleaning..."
+mkdir -p target
+rm -r target/*
+
+echo "Copying resources..."
+cp -r resources/* target
+
+echo "Compiling..."
+elm make --output target/elm.js src/Main.elm

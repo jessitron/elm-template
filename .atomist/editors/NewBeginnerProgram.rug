@@ -1,0 +1,48 @@
+
+@tag "elm"
+@description "Creates a new Elm beginner program"
+@generator "Elm Beginner Program"
+editor NewBeginnerProgram
+
+@maxLength 21
+@description "Name of your new project."
+@displayName "Project Name"
+param project_name: @project_name
+
+
+@default "jessitron"
+@description "Github user or organization"
+@optional
+@displayName "Organization"
+@validInput "This would be a good place to put your github user id"
+param org: @group_id
+
+@default "1.0.0"
+@displayName "Semantic Version"
+@optional
+@description "A Semantic Version number of the form: MAJOR.MINOR.PATCH"
+@validInput "MAJOR.MINOR.PATCH"
+param version: @semantic_version
+
+@default "helpful summary of your project, less than 80 characters"
+@optional
+@description "Summary of the new project"
+@displayName "description"
+@validInput "Under 80 characters"
+param description: .*
+
+
+SwitchProjectName
+
+
+@description "Populate project name"
+editor SwitchProjectName
+
+	@description "Name of the new project"
+	@displayName "Name"
+	param project_name: @project_name
+
+  with file when path = "resources/index.html"
+	  begin
+  	  do replace "ProjectName" project_name
+		end
