@@ -9,8 +9,41 @@ param input_name: [a-z][\w]*
 
 # capitalize
 let type_name={ input_name.charAt(0).toUpperCase() + input_name.slice(1) }
+let function_body={ input_name + "Input model = \n" +
+   "    Html.input [ Html.Events.onInput " + type_name + " ][]" }
 
 AddToModel initial_value='""', field_type="String", field_name=input_name
-AddMessage constructor={type_name + " String"},
-           deconstructor={type_name + " string"},
-           update_model={"{ model | model." + input_name + " = string }"
+
+AddMessage constructor={ type_name + " String" },
+           deconstructor={ type_name + " string" },
+           update_model={ "{model | model." + input_name + " = string }" }
+
+AddImport module="Main", fqn="Html.Events"
+
+AddFunction module="Main", code=function_body
+
+@description "add an import statement, if it does not exist yet"
+editor AddImport
+  param module: [A-Z][\w]*
+
+  @description "The import to add, fully qualified"
+  param fqn: .*
+
+  with elm.module when name = module
+    do addImportStatement {"import " + fqn}
+
+@description "add a whole declaration"
+editor AddFunction
+
+@description "Where does this belong"
+@displayName "Module Name"
+param module: [A-Z][\w]*
+
+@displayName "Code"
+@description "All the code to add"
+@validInput "An Elm declaration"
+param code: .*
+
+with file
+  with elm.module when name = module
+    do addFunction code
