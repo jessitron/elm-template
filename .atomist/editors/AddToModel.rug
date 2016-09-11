@@ -1,0 +1,53 @@
+@tag "elm"
+@description "Adds a field to the model of an Elm beginner program"
+editor AddToModel
+
+@displayName "Field Name"
+@maxLength 21
+@description "Name of the new model field"
+param field_name: [a-z][\w]*
+
+
+@displayName "Field Type"
+@description "Type of the new field"
+# @valid_input "An Elm type"
+param field_type: .*
+
+@description "Initial value of the field"
+@displayName "Initial Value"
+# @valid_input "If this is a string, please include quotes"
+param initial_value: .*
+
+
+AddToRecordTypeAlias type_name="Model", file="src/Main.elm"
+# AddToModelInitialization
+
+
+@description "Add a field to a record type alias"
+editor AddToRecordTypeAlias
+
+	@description "Where is this type alias"
+  # @valid_input "path from project root to elm file"
+	@displayName "File Name"
+	param file: .*
+
+  @description "Name of the type alias to change"
+  @displayName "Type alias Name"
+  param type_name: [a-z][\w]*
+
+  @displayName "Field Name"
+  @maxLength 21
+  @description "Name of the new model field"
+  param field_name: [a-z][\w]*
+
+
+  @displayName "Field Type"
+  @description "Type of the new field"
+  # @valid_input "An Elm type"
+  param field_type: .*
+
+  with file # when path = '$file' <- this didn't work
+   with elm.module
+    with type.alias when name = '$type_name'
+      with record
+        do add '$field_name' '$field_type'
