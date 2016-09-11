@@ -20,14 +20,13 @@ param initial_value: .*
 
 
 AddToRecordTypeAlias type_name="Model", module="Main"
-# AddToModelInitialization
+AddToModelInitialization function_name="model", module="Main", field_value=initial_value
 
 
 @description "Add a field to a record type alias"
 editor AddToRecordTypeAlias
 
 	@description "Where is this type alias"
-  @validInput "path from project root to elm file"
 	@displayName "Module Name"
 	param module: .*
 
@@ -42,11 +41,39 @@ editor AddToRecordTypeAlias
 
   @displayName "Field Type"
   @description "Type of the new field"
-  # @valid_input "An Elm type"
+  @validInput "An Elm type"
   param field_type: .*
 
 with file
   with elm.module when name = module
     with type.alias when name = type_name
-      with record
+      with recordType
         do add field_name field_type
+
+
+@description "Add a field to a record type alias"
+editor AddToModelInitialization
+
+	@description "Elm module to modify"
+	@displayName "Module Name"
+	param module: .*
+
+  @description "Name of the function that has a record value in it"
+  @displayName "Function name"
+  param function_name: [a-z][\w]*
+
+  @displayName "Field Name"
+  @description "Name of the new model field"
+  param field_name: [a-z][\w]*
+
+
+  @displayName "Field Value"
+  @description "Populate the new field"
+  @validInput "An Elm expression"
+  param field_value: .*
+
+with file
+  with elm.module when name = module
+    with function when name = function_name
+      with recordValue
+        do add field_name field_value
