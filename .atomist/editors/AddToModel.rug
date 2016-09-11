@@ -46,8 +46,8 @@ editor AddToRecordTypeAlias
   # @valid_input "An Elm type"
   param field_type: .*
 
-  with file # when path = '$file' <- this didn't work
-   with elm.module
+with file when name = 'Main.elm'
+  with elm.module when name = 'Main'
     with type.alias when name = '$type_name'
       with record
         do add '$field_name' '$field_type'
