@@ -21,6 +21,7 @@ type alias Model =
     {}
 
 
+model : Model
 model =
     {}
 
