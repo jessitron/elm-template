@@ -48,6 +48,6 @@ editor AddToRecordTypeAlias
 
 with file when name = 'Main.elm'
   with elm.module when name = 'Main'
-    with type.alias when name = '$type_name'
+    with type.alias when name = type_name
       with record
-        do add '$field_name' '$field_type'
+        do add field_name field_type
