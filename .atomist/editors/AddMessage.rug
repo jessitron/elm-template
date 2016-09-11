@@ -1,0 +1,75 @@
+@tag "elm"
+@description "Adds a Msg to an Elm beginner program"
+editor AddMessage
+
+@displayName "Message Constructor"
+@description "Message constructor, its name and parameter types"
+param constructor: .*
+
+@displayName "Deconstructor"
+@description "What this looks like in a pattern match; leave blank if there are no type parameters"
+@optional
+@default ""
+param deconstructor: .*
+
+# TODO
+# I don't know how to do this ... I want to compute a deconstructor
+# I don't even know javascript, much less how to plug some in here and store a value
+# really the condition and construction could be more complicated
+# new_pattern = { if (deconstructor.length > 0) { deconstructor } else { constructor } }
+
+AddToUnionType module="Main", type_name="Msg", constructor=constructor
+AddCaseClause module="Main", function_name="update", match="msg", new_pattern=deconstructor, body="model"
+
+@description "Add a constructor to a union type"
+editor AddToUnionType
+
+	@description "Where is this type"
+	@displayName "Module Name"
+	param module: [A-Z][\w]*
+
+  @description "The union type"
+  @displayName "Type"
+  param type_name: [a-z][\w]*
+
+  @description "The constructor to add, with its type parameters"
+  @displayName "Constructor"
+  param constructor: [a-z][\w]*
+
+with file
+  with elm.module when name = module
+    with type when name = type_name
+        do addConstructor constructor
+
+
+@description "Add a new pattern to a case"
+editor AddCaseClause
+
+	@description "Elm module to modify"
+	@displayName "Module Name"
+	param module: [A-Z][\w]*
+
+  @description "Name of the function that has a case in it"
+  @displayName "Function name"
+  param function_name: [a-z][\w]*
+
+  @displayName "Match Expression"
+  @description "What the case statement is matching"
+  param match: .*
+
+  @displayName "New Pattern"
+  @description "new pattern the case can match"
+  @validInput "A union type deconstructor"
+  param new_pattern: .*
+
+  @displayName "Result"
+  @description "body of the new case clause"
+  @validInput "An Elm expression"
+  param body: .*
+
+# TODO implement the selection by match expression
+with file
+  with elm.module when name = module
+    with function when name = function_name
+      with case # when match_expression = match
+        do addClause new_pattern body
