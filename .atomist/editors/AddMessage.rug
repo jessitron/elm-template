@@ -12,6 +12,12 @@ param constructor: .*
 @default ""
 param deconstructor: .*
 
+@displayName "Case Clause Body"
+@description "Value for model when the message is received"
+@optional
+@default "model"
+param update_model: .*
+
 # TODO
 # I don't know how to do this ... I want to compute a deconstructor
 # I don't even know javascript, much less how to plug some in here and store a value
@@ -19,7 +25,7 @@ param deconstructor: .*
 # new_pattern = { if (deconstructor.length > 0) { deconstructor } else { constructor } }
 
 AddToUnionType module="Main", type_name="Msg", constructor=constructor
-AddCaseClause module="Main", function_name="update", match="msg", new_pattern=deconstructor, body="model"
+AddCaseClause module="Main", function_name="update", match="msg", new_pattern=deconstructor, body=update_model
 
 @description "Add a constructor to a union type"
 editor AddToUnionType

@@ -1,0 +1,16 @@
+@tag "elm"
+@description "Adds a text input to an Elm beginner program"
+editor AddTextInput
+
+@displayName "Name"
+@description "Name of the text input (the field to store in the model)"
+@validInput "An elm identifier"
+param input_name: [a-z][\w]*
+
+# capitalize
+let type_name={ input_name.charAt(0).toUpperCase() + input_name.slice(1) }
+
+AddToModel initial_value='""', field_type="String", field_name=input_name
+AddMessage constructor={type_name + " String"},
+           deconstructor={type_name + " string"},
+           update_model={"{ model | model." + input_name + " = string }"
