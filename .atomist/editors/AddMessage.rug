@@ -24,7 +24,7 @@ param update_model: .*
 # really the condition and construction could be more complicated
 # new_pattern = { if (deconstructor.length > 0) { deconstructor } else { constructor } }
 
-AddToUnionType module="Main", type_name="Msg", constructor=constructor
+AddToUnionType module="Main", type_name="Msg"
 AddCaseClause module="Main", function_name="update", match="msg", new_pattern=deconstructor, body=update_model
 
 @description "Add a constructor to a union type"
@@ -42,10 +42,12 @@ editor AddToUnionType
   @displayName "Constructor"
   param constructor: [a-z][\w]*
 
-with file
+with file begin
+  do eval { print("module=" + module + ", type_name=" + type_name + ", constructor=" + constructor) }
   with elm.module when name = module
     with type when name = type_name
         do addConstructor constructor
+end
 
 
 @description "Add a new pattern to a case"
