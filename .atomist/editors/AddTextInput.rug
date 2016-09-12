@@ -15,7 +15,7 @@ let function_body={ input_name + "Input model = \n" +
 AddToModel initial_value='""', field_type="String", field_name=input_name
 
 AddMessage constructor={ type_name_foo + " String" },
-           update_model={ return "{ model | model." + input_name + " = string }" },
+           update_model={ return "{ model | " + input_name + " = string }" },
            deconstructor={ type_name_foo + " string" }
 
 AddImport module="Main", fqn="Html.Events"
