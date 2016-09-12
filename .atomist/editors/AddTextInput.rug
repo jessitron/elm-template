@@ -1,5 +1,5 @@
 @tag "elm"
-@description "Adds a text input to an Elm beginner program"
+@description "Adds a text input to an Elm beginner program "
 editor AddTextInput
 
 @displayName "Name"
@@ -10,12 +10,12 @@ param input_name: [a-z][\w]*
 # capitalize
 let type_name={ input_name.charAt(0).toUpperCase() + input_name.slice(1) }
 let function_body={ input_name + "Input model = \n" +
-   "    Html.input [ Html.Events.onInput " + type_name + " ][]\n" }
+   "    Html.input [ Html.Events.onInput " + type_name + " ] []\n" }
 
 AddToModel initial_value='""', field_type="String", field_name=input_name
 
 AddMessage constructor={ type_name + " String" },
-           update_model={ "{model | model." + input_name + " = string }" },
+           update_model={ "{ model | model." + input_name + " = string }" },
            deconstructor={ type_name + " string" }
 
 AddImport module="Main", fqn="Html.Events"
