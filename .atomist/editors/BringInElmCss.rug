@@ -49,8 +49,9 @@ editor AddCssBuildStep
   param stylesheet: .*
 
   let buildGrammar = <
+      SOMETHING : 'target';
       PLACEHOLDER : [];
-      expr : insert=PLACEHOLDER 'echo "Compiling..."';
+      expr : before=SOMETHING insert=PLACEHOLDER 'echo "Compiling..."';
   >
 
   with file f when name = "build"
