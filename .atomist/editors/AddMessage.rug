@@ -18,6 +18,9 @@ param deconstructor: .*
 @default "model"
 param update_model: .*
 
+with project
+	do eval { print("update_model=" + update_model) }
+
 # TODO
 # I don't know how to do this ... I want to compute a deconstructor
 # I don't even know javascript, much less how to plug some in here and store a value
@@ -42,12 +45,13 @@ editor AddToUnionType
   @displayName "Constructor"
   param constructor: [a-z][\w]*
 
-with file begin
+with project
   do eval { print("module=" + module + ", type_name=" + type_name + ", constructor=" + constructor) }
+
+with file
   with elm.module when name = module
     with type when name = type_name
         do addConstructor constructor
-end
 
 
 @description "Add a new pattern to a case"
