@@ -9,8 +9,14 @@ param input_name: [a-z][\w]*
 
 # capitalize
 let type_name_foo={ input_name.charAt(0).toUpperCase() + input_name.slice(1) }
-let function_body={ input_name + " : Model -> Html Msg\n" + input_name + "Input model =\n" +
-   "    Html.input [ Html.Events.onInput " + type_name_foo + " ] []\n" }
+let function_body={
+  return (
+   "_INPUT_NAME_Input : Model -> Html Msg\n" +
+   "_INPUT_NAME_Input model =\n" +
+   "    Html.input [ Html.Events.onInput _TYPE_NAME_ ] []\n").replace(
+  /_INPUT_NAME_/g, input_name).replace(
+  /_TYPE_NAME_/g, type_name_foo);
+ }
 
 AddToModel initial_value='""', field_type="String", field_name=input_name
 
