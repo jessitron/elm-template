@@ -18,17 +18,13 @@ param deconstructor: .*
 @default "model"
 param update_model: .*
 
+let smarter_deconstructor = { if (deconstructor.length > 0) return deconstructor; else return constructor }
+
 with project
 	do eval { print("update_model=" + update_model) }
 
-# TODO
-# I don't know how to do this ... I want to compute a deconstructor
-# I don't even know javascript, much less how to plug some in here and store a value
-# really the condition and construction could be more complicated
-# new_pattern = { if (deconstructor.length > 0) { deconstructor } else { constructor } }
-
 AddToUnionType module="Main", type_name="Msg"
-AddCaseClause module="Main", function_name="update", match="msg", new_pattern=deconstructor, body=update_model
+AddCaseClause module="Main", function_name="update", match="msg", new_pattern=smarter_deconstructor, body=update_model
 
 @description "Add a constructor to a union type"
 editor AddToUnionType
