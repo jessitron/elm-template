@@ -53,7 +53,7 @@ with file
         do add field_name field_type
 
 
-@description "Add a field to a record type alias"
+@description "Add a field to a record value"
 editor AddToModelInitialization
 
   @description "Elm module to modify"
@@ -74,8 +74,24 @@ editor AddToModelInitialization
   @validInput "An Elm expression"
   param field_value: .*
 
-with file
-  with elm.module when name = module
-    with function when name = function_name
-      with recordValue
-        do add field_name field_value
+  @description "If it is a string we will make sure the value is quoted"
+  param field_type: .*
+
+  let field_value_careful = {
+    var quoted = /^".*"$/
+    if (field_type == "String") {
+      if (quoted.test(field_value)) {
+        return field_value;
+      } else {
+        return '"' + field_value + '"';
+      }
+    } else
+    return field_value;
+  }
+
+
+  with file
+    with elm.module when name = module
+      with function when name = function_name
+        with recordValue
+          do add field_name field_value_careful
