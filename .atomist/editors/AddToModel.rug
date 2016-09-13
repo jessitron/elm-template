@@ -18,6 +18,8 @@ param field_type: .*
 @validInput "If this is a string, please include quotes"
 param initial_value: .*
 
+with project
+  do eval { print("Adding to model: " + field_name + " " + initial_value + " " + field_type) }
 
 AddToRecordTypeAlias type_name="Model", module="Main"
 AddToModelInitialization function_name="model", module="Main", field_value=initial_value

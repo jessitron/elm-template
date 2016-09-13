@@ -1,7 +1,7 @@
 
 @tag "elm"
 @description "Creates a new Elm beginner program"
-@generator "Elm Beginner Program"
+@generator "BeginnerProgram"
 editor NewBeginnerProgram
 
 @maxLength 21
