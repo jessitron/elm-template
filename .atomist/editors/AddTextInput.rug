@@ -54,7 +54,7 @@ AddMessage constructor={ type_name_foo + " String" },
            update_model={ return "{ model | " + input_name + " = string }" },
            deconstructor={ type_name_foo + " string" }
 
-AddImport module="Main", fqn="Html.Events"
-AddImport module="Main", fqn="Html.Attributes"
+AddImport module="Main", lizard="Html.Events"
+AddImport module="Main", lizard="Html.Attributes"
 
 AddFunction module="Main", code=function_body
