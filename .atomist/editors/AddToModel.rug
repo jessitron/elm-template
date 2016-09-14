@@ -88,7 +88,7 @@ editor AddToModelInitialization
 
   with file
     with elm.module when name = module
-      with function f when { f.name() == "init" || f.name == "model"} begin
+      with function f when { f.name() == "init" || f.name() == "model"} begin
         do eval { print("Oh look a function " + f.name())}
         with recordValue begin
           do eval { print("woot a record!!!!!")}
