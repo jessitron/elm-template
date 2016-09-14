@@ -6,11 +6,8 @@ editor AddImport
   @description "The import to add, fully qualified"
   param lizard: .*
 
-  with project p
-    do eval { print("adding import " + lizard + " to module " + module)}
-
   with file f
     with elm.module m when name = module begin
-      do eval { print("Adding import to module " + m.name() + " in " + m.filename())}
+      do eval { print("Adding import " + lizard + " to module " + m.name() + " in " + m.filename())}
       do addImportStatement {"import " + lizard}
     end
