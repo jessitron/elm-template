@@ -20,9 +20,6 @@ param update_model: .*
 
 let smarter_deconstructor = { if (deconstructor.length > 0) return deconstructor; else return constructor }
 
-with project
-	do eval { print("update_model=" + update_model) }
-
 AddToUnionType module="Main", type_name="Msg"
 AddCaseClause module="Main", new_pattern=smarter_deconstructor, body=update_model
 
@@ -42,7 +39,7 @@ editor AddToUnionType
   param constructor: [a-z][\w]*
 
 with project
-  do eval { print("Adding to Union Type smodule=" + module + ", type_name=" + type_name + ", constructor=" + constructor) }
+  do eval { print("Adding to Union Type module=" + module + ", type_name=" + type_name + ", constructor=" + constructor) }
 
 with file
   with elm.module when name = module

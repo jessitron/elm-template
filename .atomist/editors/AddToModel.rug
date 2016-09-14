@@ -18,9 +18,6 @@ param field_type: .*
 @validInput "If this is a string, please include quotes"
 param initial_value: .*
 
-with project
-  do eval { print("Adding to model: " + field_name + " " + initial_value + " " + field_type) }
-
 AddToRecordTypeAlias type_name="Model", module="Main"
 AddToModelInitialization module="Main", field_value=initial_value
 
@@ -89,9 +86,7 @@ editor AddToModelInitialization
   with file
     with elm.module when name = module
       with function f when { f.name() == "init" || f.name() == "model"} begin
-        do eval { print("Oh look a function " + f.name())}
         with recordValue begin
-          do eval { print("woot a record!!!!!")}
           do add field_name field_value_careful
         end
       end
