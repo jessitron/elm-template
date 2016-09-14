@@ -6,25 +6,35 @@ editor ExtractAllIntoModule
 @description "Name of the module to extract into"
 param new_module_name: [A-Z][\w]*
 
-let new_file_name={ new_module_name + ".elm" }
+let new_file_path={ "src/" + new_module_name + ".elm" }
 
 # copy the Main file and make into the new module
-with project p
-  do copyFile "Main.elm" new_file_name
+with project p begin
+  do copyFileOrFail "src/Main.elm" new_file_path
+end
 
-with file when name = new_file_name
+with file when path = new_file_path
   with elm.module begin
     do rename new_module_name
     do replaceExposing "Model, init, Msg, update, view, subscriptions"
   end
 
+AddImport module="Main", lizard=new_module_name
 RemoveFunction module=new_module_name, function="main"
 ReplaceInit
 ReplaceModel
 ReplaceSubscriptions
 ReplaceMsg
 ReplaceUpdate
+ReplaceView
 
+with file
+  with elm.module m when name = "Main"
+    with function f when { !(f.name() == "main" || f.name() == "init" || f.name() == "update" || f.name() == "view" || f.name() == "subscriptions")}
+    begin
+      do eval {print("omg this function does not belong I am deleting it: " + f.name())}
+      do eval { m.removeFunction(f.name()) }
+    end
 
 
 editor RemoveFunction
@@ -102,6 +112,18 @@ editor ReplaceModel
     with type.alias when name = "Model"
       do replaceBody new_body_model
 
+editor ReplaceView
+  param new_module_name: .*
+
+  let lower_new_module={ new_module_name.charAt(0).toLowerCase() + new_module_name.slice(1) }
+
+  let new_view = {
+      return("    Html.div [] [Html.App.map _UPPER_Msg (_UPPER_.view model._LOWER_)]" + "\n").replace(
+        /_LOWER_/g, lower_new_module).replace(
+        /_UPPER_/g, new_module_name)
+  }
+
+  ReplaceFunctionBody function="view", new_body=new_view
 
 editor ReplaceInit
   param new_module_name: .*
@@ -113,7 +135,7 @@ editor ReplaceInit
           "            _UPPER_.init" + "\n" +
           "    in" + "\n" +
           "        { _LOWER_ = _LOWER_Model }" + "\n" +
-          "            ! [ _LOWER_Commands ]" + "\n").replace(
+          "            ! [ Cmd.map _UPPER_Msg _LOWER_Commands ]" + "\n").replace(
             /_LOWER_/g, lower_new_module).replace(
             /_UPPER_/g, new_module_name);
   }
