@@ -1,0 +1,14 @@
+@tag "elm"
+@description "add an import statement, if it does not exist yet"
+editor AddImport
+  param module: [A-Z][\w]*
+
+  @description "The import to add, fully qualified"
+  param fqn: .*
+
+  with project p
+    do eval { print("adding import " + fqn + " to module " + module)}
+
+  with file f
+    with elm.module when name = module
+      do addImportStatement {"import " + fqn}

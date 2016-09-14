@@ -13,26 +13,6 @@ AddDependency dependency_name="rtfeldman/elm-css", dependency_version="5.0.0 <= 
 AddLinkToHeader stylesheet="elm-styles.css"
 AddCssBuildStep
 
-@description "Add a dependency to elm-package.json"
-editor AddDependency
-
-param dependency_name: .*
-
-param dependency_version: .*
-
-let dep = <
-    PLACEHOLDER : [];
-    dep : '"dependencies":' '{' here=PLACEHOLDER;
->
-
-with file when path = "elm-package.json"
-  with dep d
-   do set 'here' {
-      var computedRange = dependency_version
-      var computedThing = '"' + dependency_name + '": "' + computedRange + '",\n'
-      return computedThing + "        "
-   }
-
 @description "Add a stylesheet link to the header of index.html"
 editor AddLinkToHeader
   param stylesheet:.*

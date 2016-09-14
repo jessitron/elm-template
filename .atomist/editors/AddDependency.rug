@@ -1,0 +1,19 @@
+@description "Add a dependency to elm-package.json"
+editor AddDependency
+
+param dependency_name: .*
+
+param dependency_version: .*
+
+let dep = <
+    PLACEHOLDER : [];
+    dep : '"dependencies":' '{' here=PLACEHOLDER;
+>
+
+with file when path = "elm-package.json"
+  with dep d
+   do set 'here' {
+      var computedRange = dependency_version
+      var computedThing = '"' + dependency_name + '": "' + computedRange + '",\n'
+      return computedThing + "        "
+   }

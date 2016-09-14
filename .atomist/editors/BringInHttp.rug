@@ -1,0 +1,16 @@
+@tag "elm"
+@description "Bring elm-http into a Program, providing a fetch function"
+editor BringInHttp
+
+# AddDependency dependency_name="evancz/elm-http", dependency_version="3.0.1 <= v < 4.0.0"
+
+# ddImport module="Main", fqn="Http"
+# AddImport module="Main", fqn="Task"
+
+AddMessage constructor="FetchSuccess String", deconstructor="FetchSuccess string", update_model="model ! []"
+# AddMessage constructor="FetchFail Http.Error", deconstructor="FetchFail error", update_model="model ! []"
+
+/*AddFunction module="Main", code={
+  return "fetch decoder url = " + "\n" +
+         "    Task.perform FetchFail FetchSucceed (Http.get decoder url)"
+}*/

@@ -2,6 +2,8 @@
 @description "Adds a text input to an Elm beginner program "
 editor AddTextInput
 
+uses jessitron.elm-template.AddImport
+
 @displayName "Name"
 @description "Name of the text input (the field to store in the model)"
 @validInput "An elm identifier"
@@ -56,29 +58,3 @@ AddImport module="Main", fqn="Html.Events"
 AddImport module="Main", fqn="Html.Attributes"
 
 AddFunction module="Main", code=function_body
-
-@description "add an import statement, if it does not exist yet"
-editor AddImport
-  param module: [A-Z][\w]*
-
-  @description "The import to add, fully qualified"
-  param fqn: .*
-
-  with elm.module when name = module
-    do addImportStatement {"import " + fqn}
-
-@description "add a whole declaration"
-editor AddFunction
-
-  @description "Where does this belong"
-  @displayName "Module Name"
-  param module: [A-Z][\w]*
-
-  @displayName "Code"
-  @description "All the code to add"
-  @validInput "An Elm declaration"
-  param code: .*
-
-  with file
-    with elm.module when name = module
-      do addFunction code

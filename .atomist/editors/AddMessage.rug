@@ -24,7 +24,7 @@ with project
 	do eval { print("update_model=" + update_model) }
 
 AddToUnionType module="Main", type_name="Msg"
-AddCaseClause module="Main", function_name="update", match="msg", new_pattern=smarter_deconstructor, body=update_model
+AddCaseClause module="Main", new_pattern=smarter_deconstructor, body=update_model
 
 @description "Add a constructor to a union type"
 editor AddToUnionType
@@ -42,7 +42,7 @@ editor AddToUnionType
   param constructor: [a-z][\w]*
 
 with project
-  do eval { print("module=" + module + ", type_name=" + type_name + ", constructor=" + constructor) }
+  do eval { print("Adding to Union Type smodule=" + module + ", type_name=" + type_name + ", constructor=" + constructor) }
 
 with file
   with elm.module when name = module
@@ -57,14 +57,6 @@ editor AddCaseClause
 	@displayName "Module Name"
 	param module: [A-Z][\w]*
 
-  @description "Name of the function that has a case in it"
-  @displayName "Function name"
-  param function_name: [a-z][\w]*
-
-  @displayName "Match Expression"
-  @description "What the case statement is matching"
-  param match: .*
-
   @displayName "New Pattern"
   @description "new pattern the case can match"
   @validInput "A union type deconstructor"
@@ -78,6 +70,13 @@ editor AddCaseClause
 # TODO implement the selection by match expression
 with file
   with elm.module when name = module
-    with function when name = function_name
-      with case # when match_expression = match
-        do addClause new_pattern body
+    with function upd when name = "update"
+      with case mustalias when matchAsString = "msg"
+        do addClause new_pattern {
+           /*if (upd.typeSpecification() == "Msg -> Model -> ( Model, Cmd Msg )" &&
+					     body == "model") {
+							  print("recognized advanced application");
+								return "model ! []"
+						 } else */
+						 return body;
+				}
