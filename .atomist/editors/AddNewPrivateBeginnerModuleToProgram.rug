@@ -26,7 +26,7 @@ AddMessage constructor={ new_module_name + "Msg " + new_module_name + ".Msg" },
              /_UPPER_/g, new_module_name);
            }
 AddFunction module="Main", code={ return(
-  "_LOWER_View model = "+ "\n" +
+  "_LOWER_View model ="+ "\n" +
   "    Html.App.map _UPPER_Msg (_UPPER_.view model._LOWER_)" + "\n").replace(
     /_LOWER_/g, lower_new_module).replace(
     /_UPPER_/g, new_module_name);

@@ -15,5 +15,5 @@ Css.Elements.img
 css : Stylesheet
 css =
     stylesheet
-        [ 
+        [
         ]

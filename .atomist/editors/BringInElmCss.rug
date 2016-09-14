@@ -35,4 +35,6 @@ editor AddCssBuildStep
     with buildGrammar
       with insert
         do setValue {
-          return "echo 'Building css...'\nelm-css -o target src/Stylesheets.elm\n\n" }
+          return("echo 'Building css...'\n" +
+                 "elm-css -o target src/Stylesheets.elm\n\n")
+                }
