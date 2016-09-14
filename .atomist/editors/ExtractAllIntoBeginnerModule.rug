@@ -6,13 +6,13 @@ editor ExtractAllIntoBeginnerModule
 @description "Name of the module to extract into"
 param new_module_name: [A-Z][\w]*
 
-let new_file_name={ new_module_name + ".elm" }
+let new_file_path={ "src/" + new_module_name + ".elm" }
 
 # copy the Main file and make into the new module
 with project p
-  do copyFile "Main.elm" new_file_name
+  do copyFileOrFail "src/Main.elm" new_file_path
 
-with file when name = new_file_name
+with file when path = new_file_path
   with elm.module begin
     do rename new_module_name
     do replaceExposing "Model, model, Msg, update, view"
@@ -24,6 +24,15 @@ ReplaceIniBeginner
 ReplaceModeBeginner
 ReplaceMsBeginner
 ReplaceUpdatBeginner
+ReplaceVieBeginner
+
+with file
+  with elm.module m when name = "Main"
+    with function f when { !(f.name() == "main" || f.name() == "model" || f.name() == "update" || f.name() == "view")}
+    begin
+      do eval {print("omg this function does not belong I am deleting it: " + f.name())}
+      do eval { m.removeFunction(f.name()) }
+    end
 
 editor RemoveFunctioB
   param module: .*
@@ -47,7 +56,7 @@ let new_body_update={
           "                { model | _LOWER_ = _LOWER_Model }" + "\n" +
           "" + "\n" +
           "        Noop ->" + "\n" +
-          "            model ! []" + "\n").replace(
+          "            model" + "\n").replace(
             /_LOWER_/g, lower_new_module).replace(
             /_UPPER_/g, new_module_name);
       }
@@ -58,7 +67,7 @@ editor ReplaceMsBeginner
   param new_module_name: .*
 
   let new_body_msg={
-    return ("  Noop" + "\n" +
+    return ("Noop" + "\n" +
             "    | _UPPER_Msg _UPPER_.Msg" + "\n").replace(
               /_UPPER_/g, new_module_name);
     }
@@ -84,14 +93,28 @@ editor ReplaceModeBeginner
       do replaceBody new_body_model
 
 
+editor ReplaceVieBeginner
+  param new_module_name: .*
+
+  let lower_new_module={ new_module_name.charAt(0).toLowerCase() + new_module_name.slice(1) }
+
+  let new_view = {
+      return("    Html.div [] [Html.App.map _UPPER_Msg (_UPPER_.view model._LOWER_)]" + "\n").replace(
+        /_LOWER_/g, lower_new_module).replace(
+        /_UPPER_/g, new_module_name)
+  }
+
+  ReplaceFunctionBody function="view", new_body=new_view
+
+
 editor ReplaceIniBeginner
   param new_module_name: .*
 
   let lower_new_module={ new_module_name.charAt(0).toLowerCase() + new_module_name.slice(1) }
   let new_init={
-  return ("    { _LOWER_ =  _UPPER_.init }\n".replace(
+  return ("    { _LOWER_ = _UPPER_.model }\n".replace(
             /_LOWER_/g, lower_new_module).replace(
-            /_UPPER_/g, new_module_name);
+            /_UPPER_/g, new_module_name))
   }
 
   ReplaceFunctionBody function="model", new_body=new_init

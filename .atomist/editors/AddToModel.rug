@@ -22,7 +22,7 @@ with project
   do eval { print("Adding to model: " + field_name + " " + initial_value + " " + field_type) }
 
 AddToRecordTypeAlias type_name="Model", module="Main"
-AddToModelInitialization function_name="model", module="Main", field_value=initial_value
+AddToModelInitialization module="Main", field_value=initial_value
 
 
 @description "Add a field to a record type alias"
@@ -60,10 +60,6 @@ editor AddToModelInitialization
   @displayName "Module Name"
   param module: .*
 
-  @description "Name of the function that has a record value in it"
-  @displayName "Function name"
-  param function_name: [a-z][\w]*
-
   @displayName "Field Name"
   @description "Name of the new model field"
   param field_name: [a-z][\w]*
@@ -92,6 +88,10 @@ editor AddToModelInitialization
 
   with file
     with elm.module when name = module
-      with function when name = function_name
-        with recordValue
+      with function f when { f.name() == "init" || f.name == "model"} begin
+        do eval { print("Oh look a function " + f.name())}
+        with recordValue begin
+          do eval { print("woot a record!!!!!")}
           do add field_name field_value_careful
+        end
+      end
