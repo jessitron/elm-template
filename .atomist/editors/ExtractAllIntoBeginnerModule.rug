@@ -1,7 +1,7 @@
 @tag "elm"
 @tag "advanced"
 @description "Extract an entire Program from top-level to a module"
-editor ExtractAllIntoModule
+editor ExtractAllIntoBeginnerModule
 
 @description "Name of the module to extract into"
 param new_module_name: [A-Z][\w]*
@@ -15,19 +15,17 @@ with project p
 with file when name = new_file_name
   with elm.module begin
     do rename new_module_name
-    do replaceExposing "Model, init, Msg, update, view, subscriptions"
+    do replaceExposing "Model, model, Msg, update, view"
   end
 
-RemoveFunction module=new_module_name, function="main"
-ReplaceInit
-ReplaceModel
-ReplaceSubscriptions
-ReplaceMsg
-ReplaceUpdate
+AddImport module="Main", lizard=new_module_name
+RemoveFunctioB module=new_module_name, function="main"
+ReplaceIniBeginner
+ReplaceModeBeginner
+ReplaceMsBeginner
+ReplaceUpdatBeginner
 
-
-
-editor RemoveFunction
+editor RemoveFunctioB
   param module: .*
   param function: .*
 
@@ -35,7 +33,7 @@ editor RemoveFunction
   with elm.module when name = module
     do removeFunction function
 
-editor ReplaceUpdate
+editor ReplaceUpdatBeginner
 param new_module_name: .*
 
 let lower_new_module={ new_module_name.charAt(0).toLowerCase() + new_module_name.slice(1) }
@@ -43,12 +41,10 @@ let new_body_update={
   return( "    case msg of" + "\n" +
           "        _UPPER_Msg _LOWER_Msg ->" + "\n" +
           "            let" + "\n" +
-          "                ( _LOWER_Model, _LOWER_Commands ) =" + "\n" +
-          "                    RandomGif.update _LOWER_Msg model._LOWER_" + "\n" +
+          "                _LOWER_Model =" + "\n" +
+          "                    _UPPER_.update _LOWER_Msg model._LOWER_" + "\n" +
           "            in" + "\n" +
-          "                ( { model | _LOWER_ = _LOWER_Model }" + "\n" +
-          "                , Cmd.map _UPPER_Msg _LOWER_Commands" + "\n" +
-          "                )" + "\n" +
+          "                { model | _LOWER_ = _LOWER_Model }" + "\n" +
           "" + "\n" +
           "        Noop ->" + "\n" +
           "            model ! []" + "\n").replace(
@@ -58,22 +54,7 @@ let new_body_update={
 
   ReplaceFunctionBody function="update", new_body=new_body_update
 
-editor ReplaceSubscriptions
-  param new_module_name: .*
-
-  let lower_new_module={ new_module_name.charAt(0).toLowerCase() + new_module_name.slice(1) }
-  let new_body_subscriptions={
-    return ("   Sub.batch [ _UPPER_.subscriptions model._LOWER_ ]" + "\n").replace(
-            /_LOWER_/g, lower_new_module).replace(
-            /_UPPER_/g, new_module_name);
-    }
-
-  with file
-  with elm.module when name = "Main"
-    with function f when name = "subscriptions"
-      do replaceBody new_body_subscriptions
-
-editor ReplaceMsg
+editor ReplaceMsBeginner
   param new_module_name: .*
 
   let new_body_msg={
@@ -87,7 +68,7 @@ editor ReplaceMsg
       with type when name = "Msg"
         do replaceBody new_body_msg
 
-editor ReplaceModel
+editor ReplaceModeBeginner
   param new_module_name: .*
 
   let lower_new_module={ new_module_name.charAt(0).toLowerCase() + new_module_name.slice(1) }
@@ -103,19 +84,14 @@ editor ReplaceModel
       do replaceBody new_body_model
 
 
-editor ReplaceInit
+editor ReplaceIniBeginner
   param new_module_name: .*
 
   let lower_new_module={ new_module_name.charAt(0).toLowerCase() + new_module_name.slice(1) }
   let new_init={
-  return ("    let\n" +
-          "        ( _LOWER_Model, _LOWER_Commands ) =" + "\n" +
-          "            _UPPER_.init" + "\n" +
-          "    in" + "\n" +
-          "        { _LOWER_ = _LOWER_Model }" + "\n" +
-          "            ! [ _LOWER_Commands ]" + "\n").replace(
+  return ("    { _LOWER_ =  _UPPER_.init }\n".replace(
             /_LOWER_/g, lower_new_module).replace(
             /_UPPER_/g, new_module_name);
   }
 
-  ReplaceFunctionBody function="init", new_body=new_init
+  ReplaceFunctionBody function="model", new_body=new_init
