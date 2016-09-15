@@ -20,7 +20,17 @@ param placeholder_text: .*
 
 # capitalize
 let type_name_foo={ input_name.charAt(0).toUpperCase() + input_name.slice(1) }
-let function_body={
+
+AddToModel initial_value='""', field_type="String", field_name=input_name
+
+AddMessage constructor={ type_name_foo + " String" },
+           update_model={ return "{ model | " + input_name + " = string }" },
+           deconstructor={ type_name_foo + " string" }
+
+AddImport module="Main", lizard="Html.Events"
+AddImport module="Main", lizard="Html.Attributes"
+
+AddFunction module="Main", code={
 
   var type_attribute_line = "";
   if (html_input_type != "") {
@@ -46,14 +56,3 @@ let function_body={
   /_PLACEHOLDER_TEXT_/g, placeholder_text).replace(
   /_TYPE_NAME_/g, type_name_foo);
  }
-
-AddToModel initial_value='""', field_type="String", field_name=input_name
-
-AddMessage constructor={ type_name_foo + " String" },
-           update_model={ return "{ model | " + input_name + " = string }" },
-           deconstructor={ type_name_foo + " string" }
-
-AddImport module="Main", lizard="Html.Events"
-AddImport module="Main", lizard="Html.Attributes"
-
-AddFunction module="Main", code=function_body
