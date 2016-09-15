@@ -4,47 +4,51 @@ editor AddHttpFetch
 
 @optional
 @default "String"
-param field_type: .*
+param fetch_field_type: .*
 
 @description "Model field name to store the field"
-param field_name: .*
+param fetch_field_name: .*
 
 let module="Main"
-let success_constructor={ "FetchSuccess " + field_type }
-let lowercase_field_type={ field_type.charAt(0).toLowerCase() + field_type.slice(1) }
-let success_deconstructor={ "FetchSuccess " + lowercase_field_type }
+let success_constructor={ "FetchSuccess " + fetch_field_type }
+let lowercase_fetch_field_type={ fetch_field_type.charAt(0).toLowerCase() + fetch_field_type.slice(1) }
+let uppercase_fetch_field_name={ fetch_field_name.charAt(0).toUpperCase() + fetch_field_name.slice(1) }
+let success_deconstructor={ "FetchSuccess " + lowercase_fetch_field_type }
 
+# prerequisites
 AddDependency dependency_name="evancz/elm-http", dependency_version="3.0.1 <= v < 4.0.0"
-
 AddImport lizard="Http"
 AddImport lizard="Task"
 AddImport lizard="Json.Decode"
 
-AddToModel field_type={ "RemoteData " + field_type }, initial_value="NotAsked"
+# this fetch
+AddToModel field_name=fetch_field_name,
+           field_type={ "RemoteData" + uppercase_fetch_field_name }
+           , initial_value="NotAsked"
 
 AddMessage constructor=success_constructor,
            deconstructor=success_deconstructor,
            update_model={ return(
-             "{ model | " + field_name +
-             " = Success " + lowercase_field_type +
+             "{ model | " + fetch_field_name +
+             " = Success " + lowercase_fetch_field_type +
              " } ! []") }
 AddMessage constructor="FetchFail Http.Error",
            deconstructor="FetchFail error",
            update_model={ return(
-             "{ model | " + field_name +
+             "{ model | " + fetch_field_name +
              " = Failure error } ! []") }
 
 AddFunction code={
-  return "fetch : Json.Decode.Decoder " + field_type + " -> String -> Cmd Msg" + "\n" +
+  return "fetch : Json.Decode.Decoder " + fetch_field_type + " -> String -> Cmd Msg" + "\n" +
          "fetch decoder url =" + "\n" +
          "    Task.perform FetchFail FetchSuccess (Http.get decoder url)"
 }
 
 AddType code={
-  return("type RemoteData content" + "\n" +
+  return("type RemoteData" + uppercase_fetch_field_name + "\n" +
          "    = NotAsked"  + "\n" +
          "    | Loading" + "\n" +
-         "    | Success content" + "\n" +
+         "    | Success " + fetch_field_type + "\n" +
          "    | Failure Http.Error" + "\n"
         )
 }
