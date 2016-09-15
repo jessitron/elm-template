@@ -8,6 +8,7 @@ import Css.Elements
 Css.Elements.img
     [ display block
     , margin2 (px 5) auto
+    , height (px 300)
     ]
 , Css.Elements.div [ textAlign center ]
 -}
