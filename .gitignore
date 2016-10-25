@@ -1,2 +1,6 @@
+# for now we need to ignore .git itself as otherwise rug-lib
+# will package it into the archive
+.git
+
 target
 elm-stuff
