@@ -1,0 +1,22 @@
+@tag "elm"
+@description "make a bare elm program into a workable project"
+editor Organize
+
+AddGitIgnore
+MoveElmToSrc
+
+editor AddGitIgnore
+with project
+  do addFile name=".gitignore" content={ "elm-stuff\ntarget" }
+
+editor MoveElmToSrc
+let src_location = <
+    ROOT : '"."';
+    src_location : '"source-directories":' '[' here=ROOT;
+>
+
+with project begin
+  with file when path = "elm-package.json"
+    with src_location
+      do set 'here' '"src"'
+end
