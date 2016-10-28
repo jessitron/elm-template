@@ -16,6 +16,9 @@ let src_location = <
 >
 
 with project begin
+  with file e when nameContains ".elm" begin
+    do e.setPath newPath={ "src/" + e.name() }
+  end
   with file when path = "elm-package.json"
     with src_location
       do set 'here' '"src"'
