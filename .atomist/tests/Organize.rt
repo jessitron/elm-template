@@ -1,0 +1,11 @@
+scenario OrganizeIndexHtml should create an index.html based on the elm main program name
+
+given
+  ArchiveRoot
+
+when
+  Organize
+
+then
+  fileExists "resources/index.html"
+  and fileContains "<title>Hello</title>"

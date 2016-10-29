@@ -4,7 +4,7 @@ editor Organize
 
 AddGitIgnore
 MoveElmToSrc
-ChangeIndexHtml
+IndexHtml
 
 editor AddGitIgnore
 with project
@@ -25,13 +25,7 @@ with project begin
       do set 'here' '"src"'
 end
 
-editor ChangeIndexHtml
-let keep_title = <
-  MIDDLE : .*;
-  keep_title : '"/title"' here=MIDDLE ~'"/head"';
->
+editor IndexHtml
 
 with project
-  with file when path="index.html"
-    with keep_title
-      do set 'here' { ">\n<script src=\"elm.js\"></script>\n<" }
+  do merge "index.html.vm" to "resources/index.html"
