@@ -4,8 +4,8 @@ given
   ArchiveRoot
 
 when
-  Organize
+  Organize project="Hello"
 
 then
   fileExists "resources/index.html"
-  and fileContains "<title>Hello</title>"
+  and fileContains "resources/index.html" "<title>Hello</title>"

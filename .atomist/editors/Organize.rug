@@ -2,6 +2,8 @@
 @description "make a bare elm program into a workable project"
 editor Organize
 
+param project: .*
+
 AddGitIgnore
 MoveElmToSrc
 IndexHtml
