@@ -1,5 +1,5 @@
 <head>
-    <title>$project_name</title>
+    <title>$project</title>
     <link type="text/css" href="styles.css" rel="stylesheet"/>
     <link type="text/css" href="elm-styles.css" rel="stylesheet"/>
     <script src="elm.js"></script>
