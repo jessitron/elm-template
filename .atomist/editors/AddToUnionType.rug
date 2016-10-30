@@ -18,5 +18,5 @@ with project
 
 with file
   with elm.module when name = module
-    with type when name = type_name
+    with type t when name = type_name and { -1 === t.value().indexOf(constructor) }
         do addConstructor constructor
