@@ -2,8 +2,6 @@
 editor AddDependency
 
 
-precondition NotHasDependency
-
 param dependency_name: .*
 
 param dependency_version: .*
@@ -14,7 +12,7 @@ let dep = <
     dep : '"dependencies":' '{' here=PLACEHOLDER;
 >
 
-with file when path = "elm-package.json"
+with file f when path = "elm-package.json" and { -1 === f.content().indexOf(dependency_name) }
   with dep d
    do set 'here' {
       var computedRange = dependency_version
