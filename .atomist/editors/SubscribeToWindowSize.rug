@@ -16,7 +16,7 @@ Subscribe library_name="elm-lang/window",
 # Fetch the window size at the beginning
 AddImport module="Main", lizard="Task"
 AddMessageToAdvancedProgram constructor="SomeError String",
-                            deconstructor="SomeError string"
+                            deconstructor="SomeError err"
 AddInitialCommand command="Task.perform SomeError WindowSize Window.size"
 
 

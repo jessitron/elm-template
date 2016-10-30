@@ -28,12 +28,7 @@ editor AddCaseClause
 with file
   with elm.module when name = module
     with function upd when name = function_with_case_in_it
-      with case mustalias when matchAsString = what_is_being_matched
+      with case c when matchAsString = what_is_being_matched and { -1 == c.value().indexOf(new_pattern + ' ->')}
         do addClause new_pattern {
-           /*if (upd.typeSpecification() == "Msg -> Model -> ( Model, Cmd Msg )" &&
-					     body == "model") {
-							  print("recognized advanced application");
-								return "model ! []"
-						 } else */
 						 return body;
 				}

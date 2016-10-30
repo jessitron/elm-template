@@ -4,5 +4,5 @@ param subscription: .*
 
 with file
   with elm.module when name = "Main"
-    with function f when name = "subscriptions"
+    with function f when name = "subscriptions" and { -1 === f.body().indexOf(subscription) }
       do replaceBody { "Sub.batch [ " + subscription + ", " + f.body() + " ]"}
