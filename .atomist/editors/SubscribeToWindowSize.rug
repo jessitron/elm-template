@@ -23,7 +23,7 @@ AddInitialCommand command="Task.perform SomeError WindowSize Window.size"
 editor AddInitialCommand
 
 param command: .*
-# I am assuming the list of commands is currently empty.
+# TODO: I am assuming the list of commands is currently empty. Will overwrite any existing.
 with file f
   with elm.module when name = "Main"
     with function f when name = "init"

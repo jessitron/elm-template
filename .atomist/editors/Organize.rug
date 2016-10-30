@@ -6,11 +6,17 @@ param project_name: .*
 
 AddGitIgnore
 MoveElmToSrc
+RenameModuleToMain
 IndexHtml
 
 editor AddGitIgnore
 with project
-  do addFile name=".gitignore" content={ "elm-stuff\ntarget" }
+  do addFile name=".gitignore" content={ "elm-stuff/build-artifacts\ntarget" }
+
+editor RenameModuleToMain
+with project
+  with elm.module m when exposes("main")
+    do renameModule "Main"
 
 editor MoveElmToSrc
 let src_location = <
@@ -19,7 +25,7 @@ let src_location = <
 >
 
 with project begin
-  with file e when nameContains ".elm" begin
+  with file e when nameContains ".elm" and { -1 === e.path().indexOf("elm-stuff") } begin
     do e.setPath newPath={ "src/" + e.name() }
   end
   with file when path = "elm-package.json"
