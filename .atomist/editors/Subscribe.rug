@@ -1,13 +1,35 @@
 editor Subscribe
 
-AddDependency dependency_name="elm-lang/window", dependency_version="1.0.0 <= v < 2.0.0"
+@description "The library that provides the subscription"
+param library_name: .*
 
-AddImport module="Main", lizard="Window"
+param library_version: .*
 
-AddToModel field_name="windowSize", field_type="Window.Size", initial_value="{ width = 1, height = 1 }"
+@description "Package that contains the function that gives us a subscription"
+param namespace: .*
 
-AddMessageToAdvancedProgram constructor="WindowSize Window.Size",
-           deconstructor="WindowSize size",
-           update_model="{ model | windowSize = size}"
+@description "Function to call that gives us a subscription"
+param name_of_subscription: .*
 
-AddSubscription subscription="Window.resizes WindowSize"
+@description "Message to pass around to respond to subscription"
+param message: .*
+
+@description "Type of data the subscription provides"
+param type_of_content: .*
+
+@description "What to call the model field that holds the data we get from the subscription"
+param name_of_content: .*
+
+param initial_value_of_content: .*
+
+AddDependency dependency_name=library_name, dependency_version=library_version
+
+AddImport module="Main", lizard=namespace
+
+AddToModel field_name=name_of_content, field_type=type_of_content, initial_value=initial_value_of_content
+
+AddMessageToAdvancedProgram constructor={ message + " " + type_of_content },
+           deconstructor={ message + " " + name_of_content },
+           update_model_advanced={ return ('{ model | ' + name_of_content + " = " + name_of_content + ' }') }
+
+AddSubscription subscription={ namespace + "." + name_of_subscription + " " + message }

@@ -16,9 +16,9 @@ param deconstructor: .*
 @description "Value for model when the message is received"
 @optional
 @default "model"
-param update_model: .*
+param update_model_advanced: .*
 
 let smarter_deconstructor = { if (deconstructor.length > 0) return deconstructor; else return constructor }
 
 AddToUnionType module="Main", type_name="Msg"
-AddCaseClause module="Main", new_pattern=smarter_deconstructor, body={ update_model + " ! []" }
+AddCaseClause module="Main", new_pattern=smarter_deconstructor, body={ update_model_advanced + " ! []" }
