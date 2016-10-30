@@ -1,0 +1,13 @@
+editor Subscribe
+
+AddDependency dependency_name="elm-lang/window", dependency_version="1.0.0 <= v < 2.0.0"
+
+AddImport module="Main", lizard="Window"
+
+AddToModel field_name="windowSize", field_type="Window.Size", initial_value="{ width = 1, height = 1 }"
+
+AddMessage constructor="WindowSize Window.Size",
+           deconstructor="WindowSize size",
+           update_model="{ model | windowSize = size}"
+
+AddSubscription subscription="Window.resizes WindowSize"

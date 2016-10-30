@@ -1,0 +1,8 @@
+editor AddSubscription
+
+param subscription: .*
+
+with file
+  with elm.module when name = "Main"
+    with function f when name = "subscriptions"
+      do replaceBody { "Sub.batch [ " + subscription + ", " + f.body() + " ]"}
