@@ -6,7 +6,7 @@ AddImport module="Main", lizard="Window"
 
 AddToModel field_name="windowSize", field_type="Window.Size", initial_value="{ width = 1, height = 1 }"
 
-AddMessage constructor="WindowSize Window.Size",
+AddMessageToAdvancedProgram constructor="WindowSize Window.Size",
            deconstructor="WindowSize size",
            update_model="{ model | windowSize = size}"
 

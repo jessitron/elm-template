@@ -1,6 +1,6 @@
 @tag "elm"
-@description "Adds a Msg to an Elm beginner program"
-editor AddMessage
+@description "Adds a Msg to an Elm Program"
+editor AddMessageToAdvancedProgram
 
 @displayName "Message Constructor"
 @description "Message constructor, its name and parameter types"
@@ -21,4 +21,4 @@ param update_model: .*
 let smarter_deconstructor = { if (deconstructor.length > 0) return deconstructor; else return constructor }
 
 AddToUnionType module="Main", type_name="Msg"
-AddCaseClause module="Main", new_pattern=smarter_deconstructor, body=update_model
+AddCaseClause module="Main", new_pattern=smarter_deconstructor, body={ update_model + " ! []" }
