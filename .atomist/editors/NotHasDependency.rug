@@ -1,0 +1,6 @@
+@description "the dependency is not yet in elm-package.json"
+predicate NotHasDependency
+
+param dependency_name: .*
+
+with file f when path = "elm-package.json" and { -1 === f.contents().indexOf(dependency_name) }

@@ -1,9 +1,13 @@
 @description "Add a dependency to elm-package.json"
 editor AddDependency
 
+
+precondition NotHasDependency
+
 param dependency_name: .*
 
 param dependency_version: .*
+
 
 let dep = <
     PLACEHOLDER : [];
