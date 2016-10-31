@@ -4,7 +4,7 @@ given
   ArchiveRoot
 
 when
-  Organize project="Hello"
+  Organize project_name="Hello"
 
 then
   fileExists "resources/index.html"
