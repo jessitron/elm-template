@@ -1,0 +1,58 @@
+editor UpgradeToBeginnerProgram
+
+precondition IsStaticPage
+
+let guts = """
+main : Program Never
+main =
+    Html.App.beginnerProgram
+        { model = model
+        , update = update
+        , view = view
+        }
+
+
+
+-- MODEL
+
+
+type alias Model =
+    {}
+
+
+model : Model
+model =
+    {}
+
+
+
+-- UPDATE
+
+
+type Msg
+    = Noop
+
+
+update : Msg -> Model -> Model
+update msg model =
+    case msg of
+        Noop ->
+            model
+
+
+
+-- VIEW
+
+
+view : Model -> Html Msg
+view model =
+"""
+
+with project
+  do eval { print("Upgrading from static to beginner program")}
+
+AddImport lizard="Html.App"
+
+
+with file f when path="src/Main.elm"
+    do replace "main =" guts

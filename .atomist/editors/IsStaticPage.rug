@@ -1,0 +1,5 @@
+@description "Is this a static web page expressed in Elm?"
+predicate IsStaticPage
+
+with project
+  with file fi when name = "gargagsdg"

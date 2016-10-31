@@ -1,6 +1,9 @@
 @tag "elm"
 @description "add an import statement, if it does not exist yet"
 editor AddImport
+
+  @optional
+  @default "Main"
   param module: [A-Z][\w]*
 
   @description "The import to add, fully qualified"
