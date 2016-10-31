@@ -8,15 +8,22 @@ AddGitIgnore
 MoveElmToSrc
 RenameModuleToMain
 IndexHtml
+AddBuildScript
 
 editor AddGitIgnore
 with project
-  do addFile name=".gitignore" content={ "elm-stuff/build-artifacts\ntarget" }
+  do addFile name=".gitignore" content={ ".git\nelm-stuff/build-artifacts\ntarget" }
+
+editor AddBuildScript
+with project
+  do copyEditorBackingFileOrFail sourcePath="build"
 
 editor RenameModuleToMain
 with project
-  with elm.module m when exposes("main")
-    do renameModule "Main"
+  with file f
+    with elm.module m when exposes("main") begin
+      do rename "Main"
+    end
 
 editor MoveElmToSrc
 let src_location = <
@@ -35,5 +42,8 @@ end
 
 editor IndexHtml
 
-with project
+with project begin
+  do deleteFile "index.html"
   do merge "index.html.vm" to "resources/index.html"
+  do merge "styles.css.vm" to "resources/styles.css"
+end
