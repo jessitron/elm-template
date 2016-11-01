@@ -1,2 +1,71 @@
-html,head,body { padding:0; margin:0; }
-body { font-family: calibri, helvetica, arial, sans-serif; }
+canvas {
+  width: 100%;
+  height: 100%;
+  background-size: 100% 100%;
+  transition: 1s ease-in-out;
+  border: none;
+  margin: 0px;
+  padding: 0px;
+}
+
+main {
+  top: 0px;
+  left: 0px;
+  width: 80vw;
+  height: 100vh;
+  position: absolute;
+}
+
+aside {
+  top: 0vh;
+  height: 100vh;
+  left: 80vw;
+  width: 20vw;
+  position: absolute;
+  border: 3px groove green;
+  box-sizing: border-box;
+  vertical-align: top;
+  overflow: scroll;
+  padding: 10px;
+  background-color: white;
+}
+
+main div label {
+  font-family: Helvetica;
+  text-align: center;
+  margin: 0px;
+}
+
+#lastClickPoint {
+  width: 20px;
+  height: 20px;
+  margin: 0px;
+  padding: 0px;
+  transform: translate(-10px, -10px);
+}
+
+output {
+  font-family: Courier;
+  border: 1px solid black;
+  padding: 2px;
+  min-width: 60%; /* I don't know how to do this */
+  margin: 2px;
+}
+
+div {
+  top: 0px;
+  left: 0px;
+  position: absolute;
+}
+
+button {
+  margin: 2px;
+}
+
+#lastClickPoint {
+  width: 20px;
+  height: 20px;
+  margin: 0px;
+  padding: 0px;
+  transform: translate(-10px, -10px);
+}
