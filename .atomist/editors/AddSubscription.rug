@@ -7,7 +7,7 @@ with file
     with function f when name = "subscriptions" and { -1 === f.body().indexOf(subscription) }
       do replaceBody {
         if (f.body().trim() === "Sub.none") {
-          return "Sub.batch [ " + subscription + " ]";
+          return subscription;
         }
         if (0 === f.body().indexOf("Sub.batch")) {
           return f.body().replace("]", ", " + subscription + " ]");
