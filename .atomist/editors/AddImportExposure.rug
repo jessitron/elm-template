@@ -1,0 +1,19 @@
+editor AddImportExposure
+
+@optional
+@default "Main"
+param containing_module: .*
+
+param imported_module: .*
+
+param new_exposure: .*
+
+with project
+  with file
+    with elm.module begin
+      do eval { print(" looking for imports ") ; }
+      with import imp when module=imported_module begin
+        do eval { print("time to add the exposure to <" + imp.module() + ">"); }
+        do addExposure new_exposure
+      end
+    end

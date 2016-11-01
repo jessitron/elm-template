@@ -49,7 +49,8 @@ view model ="""
 with project
   do eval { print("Upgrading from static to beginner program")}
 
-AddImport lizard="Html.App"
+AddImport module="Main", lizard="Html.App"
+AddImportExposure containing_module="Main", imported_module="Html", new_exposure="Html"
 
 
 with file f when path="src/Main.elm"
