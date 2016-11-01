@@ -5,8 +5,8 @@ editor Organize
 param project_name: .*
 
 AddGitIgnore
-MoveElmToSrc
 RenameModuleToMain
+MoveElmToSrc
 IndexHtml
 AddBuildScript
 
