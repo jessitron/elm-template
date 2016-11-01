@@ -7,5 +7,5 @@ Subscribe library_name="elm-lang/mouse",
           name_of_subscription="clicks",
           message="Click",
           name_of_content="lastClick",
-          type_of_content="Mouse.MousePosition",
+          type_of_content="Mouse.Position",
           initial_value_of_content="{ x = 40, y = 50 }"
