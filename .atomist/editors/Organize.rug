@@ -12,7 +12,7 @@ AddBuildScript
 
 editor AddGitIgnore
 with project
-  do addFile name=".gitignore" content={ ".git\nelm-stuff/build-artifacts\ntarget" }
+  do addFile name=".gitignore" content={ ".git\nelm-stuff\ntarget" }
 
 editor AddBuildScript
 with project
