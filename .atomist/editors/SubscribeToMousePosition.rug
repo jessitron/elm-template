@@ -1,0 +1,11 @@
+editor SubscribeToMousePosition
+
+
+Subscribe library_name="elm-lang/mouse",
+          library_version="1.0.0 <= v < 2.0.0",
+          namespace="Mouse",
+          name_of_subscription="clicks",
+          message="Click",
+          name_of_content="lastClick",
+          type_of_content="Mouse.MousePosition",
+          initial_value_of_content="{ x = 40, y = 50 }"
