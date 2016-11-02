@@ -1,0 +1,19 @@
+@description "Make it easy to use the focus command"
+editor FocusCommand
+
+
+let request_focus_function="""requestFocus field_id =
+    Task.perform DomError FocusSuccess (Dom.focus field_id)
+"""
+
+AddDependency dependency_name="elm-lang/dom", dependency_version="1.1.0 <= v < 2.0.0"
+
+AddImport lizard="Dom"
+AddImport lizard="Task"
+
+AddMessageToAdvancedProgram constructor="DomError Dom.Error",
+                            deconstructor="DomError (Dom.NotFound notFound)"
+AddMessageToAdvancedProgram constructor="FocusSuccess ()",
+                            deconstructor="FocusSuccess _"
+
+AddFunction module="Main", code=request_focus_function
