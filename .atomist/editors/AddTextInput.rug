@@ -15,7 +15,7 @@ let function_body={
    "_INPUT_NAME_Input model =\n" +
    "    Html.input\n" +
    "        [ Html.Events.onInput _TYPE_NAME_\n" +
-   "        , Html.Attributes.content model._INPUT_NAME_\n" +
+   "        , Html.Attributes.value model._INPUT_NAME_\n" +
    "        ]\n" +
    "        []\n").replace(
   /_INPUT_NAME_/g, input_name).replace(
