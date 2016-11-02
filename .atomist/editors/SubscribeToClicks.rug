@@ -1,4 +1,4 @@
-editor SubscribeToMousePosition
+editor SubscribeToClicks
 
 
 Subscribe library_name="elm-lang/mouse",
