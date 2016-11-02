@@ -1,0 +1,26 @@
+@description "Make it easy to respond to presses of enter in a text input"
+editor OnEnter
+
+@description "A message that you're likely to send when enter is pressed"
+param enter_message: .*
+
+
+let on_enter_function="""onEnter : Msg -> Html.Attribute Msg
+onEnter msg =
+    let
+        tagger code =
+            if code == 13 then
+                msg
+            else
+                Noop
+    in
+        Html.Events.on _QUOTE_keydown_QUOTE_ (Json.Decode.map tagger Html.Events.keyCode)
+"""
+
+
+AddImport lizard="Html.Events"
+AddImport lizard="Json.Decode"
+
+AddMessageToAdvancedProgram constructor=enter_message, deconstructor=enter_message
+
+AddFunction module="Main", code={ on_enter_function.replace(/_QUOTE_/g, '"') }
