@@ -3,9 +3,9 @@
 editor Organize
 
 AddGitIgnore
+MoveElmToSrc
 IndexHtml
 RenameModuleToMain
-MoveElmToSrc
 AddBuildScript
 
 editor AddGitIgnore
@@ -40,7 +40,7 @@ end
 
 editor IndexHtml
 
-let page_title=$({elm.module}$[.exposes('main')]).name
+let page_title=$(src//{elm.module}$[.exposes('main')]).name
 
 with project begin
   do eval { print("page title " + page_title); }
