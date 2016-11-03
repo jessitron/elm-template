@@ -53,5 +53,7 @@ AddImport module="Main", lizard="Html.App"
 AddImportExposure containing_module="Main", imported_module="Html", new_exposure="Html"
 
 
-with file f when path="src/Main.elm"
+with file f when path="src/Main.elm" begin
+    do regexpReplace "main : Html.*$" ""
     do replace "main =" guts
+end
