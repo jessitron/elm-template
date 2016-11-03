@@ -2,12 +2,10 @@
 @description "make a bare elm program into a workable project"
 editor Organize
 
-param project_name: .*
-
 AddGitIgnore
+IndexHtml
 RenameModuleToMain
 MoveElmToSrc
-IndexHtml
 AddBuildScript
 
 editor AddGitIgnore
@@ -42,7 +40,10 @@ end
 
 editor IndexHtml
 
+let page_title=$({elm.module}$[.exposes('main')]).name
+
 with project begin
+  do eval { print("page title " + page_title); }
   do deleteFile "index.html"
   do merge "index.html.vm" to "resources/index.html"
   do merge "styles.css.vm" to "resources/styles.css"
