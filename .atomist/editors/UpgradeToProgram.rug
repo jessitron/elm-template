@@ -64,7 +64,7 @@ editor UpgradeMainFunction
       begin
         with function f when name = 'main'
           do replaceBody{ return (
-             "Html.App.program" + "\n" +
+             "Html.program" + "\n" +
              "        {  init = init" + "\n" +
              "        , subscriptions = subscriptions" + "\n" +
              "        , update = update" + "\n" +

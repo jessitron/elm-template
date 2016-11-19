@@ -4,7 +4,7 @@ precondition IsStaticPage
 
 let guts = """main : Program Never
 main =
-    Html.App.beginnerProgram
+    Html.beginnerProgram
         { model = model
         , update = update
         , view = view
@@ -49,7 +49,7 @@ view model ="""
 with project
   do eval { print("Upgrading from static to beginner program")}
 
-AddImport module="Main", lizard="Html.App"
+AddImport module="Main", lizard="Html"
 AddImportExposure containing_module="Main", imported_module="Html", new_exposure="Html"
 
 
