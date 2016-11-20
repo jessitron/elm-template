@@ -13,7 +13,6 @@ cssFiles =
     toFileStructure [ ( "elm-styles.css", compile [ MainCss.css ] ) ]
 
 
-main : Program Never
 main =
     Html.program
         { init = ( (), files cssFiles )
