@@ -10,7 +10,7 @@ param new_exposure: .*
 
 with project
   with file
-    with elm.module begin
+    with elm.module m when m.name=containing_module begin
       do eval { print(" looking for import ") ; }
       with import imp when module=imported_module begin
         do eval { print("time to add the exposure to <" + imp.module() + ">"); }
