@@ -1,8 +1,8 @@
 
 @tag "elm"
-@description "Creates a new Elm beginner program"
-@generator "BeginnerProgram"
-editor NewBeginnerProgram
+@description "Creates a new static Elm program"
+@generator "StaticPage"
+editor NewStaticPage
 
 @maxLength 21
 @description "Name of your new project."
@@ -10,7 +10,7 @@ editor NewBeginnerProgram
 param project_name: @project_name
 
 
-@default "jessitron"
+@default "satellite-of-love"
 @description "Github user or organization"
 @optional
 @displayName "Organization"
