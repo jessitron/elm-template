@@ -2,7 +2,7 @@ group: jessitron
 artifact: elm-template
 version: 1.0.0
 
-requires: "1.2.0-SNAPSHOT"
+requires: "1.4.2-SNAPSHOT"
 
 dependencies:
 
