@@ -14,7 +14,7 @@ Subscribe library_name="elm-lang/window",
           initial_value_of_content="{ width = 1, height = 1 }"
 
 # Fetch the window size at the beginning
-AddImport module="Main", lizard="Task"
+AddImport module="Main", module_to_import="Task"
 AddMessage constructor="SomeError String",
            deconstructor="SomeError err",
            update_model="model ! []"

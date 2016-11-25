@@ -2,5 +2,4 @@ predicate IsBeginnerProgram
 
 with project
   with file f
-    with elm.module when name="Main"
-      with function fn when name="main" and { 0 < fn.body().indexOf("beginnerProgram") }
+    with elm.module when name="Poo"

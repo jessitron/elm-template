@@ -12,9 +12,9 @@ let success_deconstructor={ "FetchSuccess " + lowercase_type_to_fetch }
 
 AddDependency dependency_name="evancz/elm-http", dependency_version="3.0.1 <= v < 4.0.0"
 
-AddImport module="Main", lizard="Http"
-AddImport module="Main", lizard="Task"
-AddImport module="Main", lizard="Json.Decode"
+AddImport module="Main", module_to_import="Http"
+AddImport module="Main", module_to_import="Task"
+AddImport module="Main", module_to_import="Json.Decode"
 
 AddMessage constructor=success_constructor, deconstructor=success_deconstructor, update_model="model ! []"
 AddMessage constructor="FetchFail Http.Error", deconstructor="FetchFail error", update_model="model ! []"

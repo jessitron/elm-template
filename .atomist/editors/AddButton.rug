@@ -29,7 +29,7 @@ let function_body={
 AddMessageToAdvancedProgram constructor=button_message,
            deconstructor=button_message
 
-AddImport module="Main", lizard="Html.Events"
-AddImport module="Main", lizard="Html.Attributes"
+AddImport module="Main", module_to_import="Html.Events"
+AddImport module="Main", module_to_import="Html.Attributes"
 
 AddFunction module="Main", code=function_body

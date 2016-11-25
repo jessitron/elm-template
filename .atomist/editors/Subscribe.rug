@@ -24,7 +24,7 @@ param initial_value_of_content: .*
 
 AddDependency dependency_name=library_name, dependency_version=library_version
 
-AddImport module="Main", lizard=namespace
+AddImport module="Main", module_to_import=namespace
 
 AddToModel field_name=name_of_content, field_type=type_of_content, initial_value=initial_value_of_content
 

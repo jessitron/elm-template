@@ -49,7 +49,7 @@ view model ="""
 with project
   do eval { print("Upgrading from static to beginner program")}
 
-AddImport module="Main", lizard="Html"
+AddImport module="Main", module_to_import="Html"
 AddImportExposure containing_module="Main", imported_module="Html", new_exposure="Html"
 
 

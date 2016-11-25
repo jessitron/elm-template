@@ -18,8 +18,8 @@ onEnter msg =
 """
 
 
-AddImport lizard="Html.Events"
-AddImport lizard="Json.Decode"
+AddImport module_to_import="Html.Events"
+AddImport module_to_import="Json.Decode"
 
 AddMessageToAdvancedProgram constructor=enter_message, deconstructor=enter_message
 

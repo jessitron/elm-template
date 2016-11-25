@@ -29,7 +29,7 @@ AddMessage constructor={ type_name_foo + " String" },
            update_model={ return "{ model | " + input_name + " = string }" },
            deconstructor={ type_name_foo + " string" }
 
-AddImport module="Main", lizard="Html.Events"
-AddImport module="Main", lizard="Html.Attributes"
+AddImport module="Main", module_to_import="Html.Events"
+AddImport module="Main", module_to_import="Html.Attributes"
 
 AddFunction module="Main", code=function_body
