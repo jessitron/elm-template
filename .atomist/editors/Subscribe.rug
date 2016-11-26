@@ -30,6 +30,6 @@ AddToModel field_name=name_of_content, field_type={ "Maybe " + type_of_content }
 
 AddMessage constructor={ message + " ( Maybe " + type_of_content + " )" },
            deconstructor={ message + " maybe_" + name_of_content },
-           update_model={ return ('{ model | ' + name_of_content + " = " + name_of_content + ' }') }
+           update_model={ return ('{ model | ' + name_of_content + " = maybe_" + name_of_content + ' }') }
 
-AddSubscription subscription={ namespace + "." + name_of_subscription + " ( Just << " + message + " )"}
+AddSubscription subscription={ return (namespace + "." + name_of_subscription + " ( Just >> " + message + " )") }

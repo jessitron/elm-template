@@ -1,4 +1,5 @@
 @description "Add a dependency to elm-package.json"
+@tag "elm"
 editor AddDependency
 
 
