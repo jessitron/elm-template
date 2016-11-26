@@ -17,7 +17,7 @@ Subscribe library_name="elm-lang/window",
 AddImport module="Main", module_to_import="Task"
 AddMessage constructor="SomeError String",
            deconstructor="SomeError err",
-           update_model="model ! []"
+           update_model="model"
 AddInitialCommand command="Task.perform SomeError WindowSize Window.size"
 
 

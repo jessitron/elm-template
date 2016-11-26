@@ -12,8 +12,8 @@ param constructor: .*
 @default ""
 param deconstructor: .*
 
-@displayName "Case Clause Body"
-@description "Value for model when the message is received"
+@displayName "Deconstructor"
+@description "What this looks like in a pattern match; leave blank if there are no type parameters"
 @optional
 @default "model"
 param update_model: .*
@@ -21,4 +21,4 @@ param update_model: .*
 let smarter_deconstructor = { if (deconstructor.length > 0) return deconstructor; else return constructor }
 
 AddToUnionType module="Main", type_name="Msg"
-AddUpdateClause module="Main", new_pattern=smarter_deconstructor, body=update_model
+AddUpdateClause module="Main", new_pattern=smarter_deconstructor, model_to_return=update_model

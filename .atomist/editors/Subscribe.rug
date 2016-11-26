@@ -28,8 +28,8 @@ AddImport module="Main", module_to_import=namespace
 
 AddToModel field_name=name_of_content, field_type=type_of_content, initial_value=initial_value_of_content
 
-AddMessageToAdvancedProgram constructor={ message + " " + type_of_content },
+AddMessage constructor={ message + " " + type_of_content },
            deconstructor={ message + " " + name_of_content },
-           update_model_advanced={ return ('{ model | ' + name_of_content + " = " + name_of_content + ' }') }
+           update_model={ return ('{ model | ' + name_of_content + " = " + name_of_content + ' }') }
 
 AddSubscription subscription={ namespace + "." + name_of_subscription + " " + message }

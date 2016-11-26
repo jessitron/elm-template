@@ -25,8 +25,8 @@ let function_body={
 
 AddToModel initial_value='""', field_type="String", field_name=input_name
 
-AddMessageToAdvancedProgram constructor={ type_name_foo + " String" },
-           update_model_advanced={ return "{ model | " + input_name + " = string }" },
+AddMessage constructor={ type_name_foo + " String" },
+           update_model={ return "{ model | " + input_name + " = string }" },
            deconstructor={ type_name_foo + " string" }
 
 AddImport module="Main", module_to_import="Html.Events"

@@ -16,8 +16,8 @@ AddImport module="Main", module_to_import="Http"
 AddImport module="Main", module_to_import="Task"
 AddImport module="Main", module_to_import="Json.Decode"
 
-AddMessage constructor=success_constructor, deconstructor=success_deconstructor, update_model="model ! []"
-AddMessage constructor="FetchFail Http.Error", deconstructor="FetchFail error", update_model="model ! []"
+AddMessage constructor=success_constructor, deconstructor=success_deconstructor, update_model="model"
+AddMessage constructor="FetchFail Http.Error", deconstructor="FetchFail error", update_model="model"
 
 AddFunction module="Main", code={
   return "fetch : Json.Decode.Decoder " + type_to_fetch + " -> String -> Cmd Msg" + "\n" +

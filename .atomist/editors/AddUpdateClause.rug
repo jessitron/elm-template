@@ -13,18 +13,16 @@ editor AddUpdateClause
   param new_pattern: .*
 
 	@displayName "Body of case clause"
-	@description "What to return when this case is met, or blank and I'll decide"
+	@description "What to return when this case is met. usually 'model'"
 	@validInput "An Elm expression"
-	param body: .*
+	param model_to_return: .*
 
 with file
   with elm.module when name = module
     with function upd when name = "update" and { -1 == upd.body().indexOf(new_pattern + ' ->')} begin
 		  do eval { print("type is " + upd.typeSpecification())}
-      with case c when { (body === "" ) && upd.typeSpecification().endsWith("Model")}
-        do addClause new_pattern "model"
-			with case c when { (body === "") && upd.typeSpecification().endsWith(")")}
-        do addClause new_pattern "model ! []"
-			with case c when { body !== "" }
-			  do addClause new_pattern body
+      with case c when { upd.typeSpecification().endsWith("Model")}
+        do addClause new_pattern model_to_return
+			with case c when { upd.typeSpecification().endsWith(")")}
+        do addClause new_pattern { model_to_return + " ! []" }
 		end

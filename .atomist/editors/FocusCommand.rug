@@ -11,9 +11,11 @@ AddDependency dependency_name="elm-lang/dom", dependency_version="1.1.0 <= v < 2
 AddImport module_to_import="Dom"
 AddImport module_to_import="Task"
 
-AddMessageToAdvancedProgram constructor="DomError Dom.Error",
-                            deconstructor="DomError (Dom.NotFound notFound)"
-AddMessageToAdvancedProgram constructor="FocusSuccess ()",
-                            deconstructor="FocusSuccess _"
+AddMessage constructor="DomError Dom.Error",
+           deconstructor="DomError (Dom.NotFound notFound)",
+           update_model = "model"
+AddMessage constructor="FocusSuccess ()",
+           deconstructor="FocusSuccess _",
+           update_model = "model"
 
 AddFunction module="Main", code=request_focus_function
