@@ -19,6 +19,7 @@ let function_body={
    "_BUTTON_NAME_button model =\n" +
    "    Html.button\n" +
    "        [ Html.Events.onClick _TYPE_NAME_\n" +
+   "        , Html.Attributes.id \"_BUTTON_NAME_\"\n" +
    "        ]\n" +
    "        [Html.text \"_BUTTON_TEXT_\"]\n").replace(
   /_BUTTON_NAME_/g, button_name).replace(
@@ -26,7 +27,7 @@ let function_body={
   /_BUTTON_TEXT_/g, button_text);
  }
 
-AddMessageToAdvancedProgram constructor=button_message,
+AddMessage constructor=button_message,
            deconstructor=button_message
 
 AddImport module="Main", module_to_import="Html.Events"
