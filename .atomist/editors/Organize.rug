@@ -1,5 +1,5 @@
 @tag "elm"
-@description "make a bare elm program into a workable project"
+@description "make a bare Elm program into a workable project"
 editor Organize
 
 param project_name: .*

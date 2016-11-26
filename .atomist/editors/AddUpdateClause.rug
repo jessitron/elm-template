@@ -1,4 +1,5 @@
-@description "Add a new pattern to a case"
+@description "Add a new pattern to a case in the update function"
+@tag "elm"
 editor AddUpdateClause
 
 	@description "Elm module to modify"

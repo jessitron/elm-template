@@ -1,3 +1,5 @@
+@tag "elm"
+@description "Add a subscription to the subscriptions function"
 editor AddSubscription
 
 param subscription: .*

@@ -1,3 +1,5 @@
+@tag "elm"
+@description "Learn about the window size"
 editor SubscribeToWindowSize
 
 @optional

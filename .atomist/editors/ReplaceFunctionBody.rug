@@ -1,9 +1,0 @@
-editor ReplaceFunctionBody
-
-  param function: .*
-  param new_body: .*
-  # gut all the functions in Main and make them call the new module
-  with file
-    with elm.module when name = "Main"
-      with function when name = function
-        do replaceBody new_body

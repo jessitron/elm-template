@@ -1,4 +1,5 @@
 @description "Make it easy to use the focus command"
+@tag "elm"
 editor FocusCommand
 
 

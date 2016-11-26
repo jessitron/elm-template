@@ -1,5 +1,5 @@
 @tag "elm"
-@description "Adds a text input to an Elm beginner program "
+@description "Adds a text input, with optional type and placeholder, to an Elm program"
 editor AddTextInputWithDetails
 
 @displayName "Name"

@@ -1,5 +1,0 @@
-predicate IsBeginnerProgram
-
-with project
-  with file f
-    with elm.module when name="Poo"

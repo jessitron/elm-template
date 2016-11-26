@@ -1,4 +1,5 @@
 @description "Make it easy to respond to presses of enter in a text input"
+@tag "elm"
 editor OnEnter
 
 @description "A message that you're likely to send when enter is pressed"

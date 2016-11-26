@@ -1,5 +1,5 @@
 @tag "elm"
-@description "Adds a field to the model of an Elm beginner program"
+@description "Adds a field to the model of an Elm program"
 editor AddToModel
 
 @displayName "Field Name"

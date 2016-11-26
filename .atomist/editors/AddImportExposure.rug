@@ -1,3 +1,5 @@
+@tag "elm"
+@description "Expose something from an existing import"
 editor AddImportExposure
 
 @optional
