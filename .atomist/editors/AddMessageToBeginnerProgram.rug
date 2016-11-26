@@ -23,4 +23,4 @@ param update_model: .*
 let smarter_deconstructor = { if (deconstructor.length > 0) return deconstructor; else return constructor }
 
 AddToUnionType module="Main", type_name="Msg"
-AddCaseClause module="Main", new_pattern=smarter_deconstructor, body=update_model
+AddUpdateClause module="Main", new_pattern=smarter_deconstructor, body=update_model
