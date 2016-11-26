@@ -10,8 +10,7 @@ Subscribe library_name="elm-lang/window",
           name_of_subscription="resizes",
           message="WindowSize",
           name_of_content="windowSize",
-          type_of_content="Window.Size",
-          initial_value_of_content="{ width = 1, height = 1 }"
+          type_of_content="Window.Size"
 
 # Fetch the window size at the beginning
 AddImport module="Main", module_to_import="Task"
