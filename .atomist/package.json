@@ -1,0 +1,23 @@
+{
+    "group": "atomist-rugs",
+    "name": "typescript-editors",
+    "version": "0.1.1",
+    "description": "Sample Editors for using with Atomist Rug",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/atomist/typescript-editors.git"
+    },
+    "keywords": [
+        "Atomist",
+        "Rug"
+    ],
+    "author": "Atomist, Inc",
+    "license": "Apache-2.0",
+    "bugs": {
+        "url": "https://github.com/atomist/typescript-editors/issues"
+    },
+    "homepage": "https://github.com/atomist/typescript-editors#readme",
+    "dependencies": {
+        "@atomist/rug": "0.1.2"
+    }
+}
