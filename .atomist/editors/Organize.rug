@@ -26,18 +26,13 @@ with project
     end
 
 editor MoveElmToSrc
-let src_location = <
-    ROOT : '"."';
-    src_location : '"source-directories":' '[' here=ROOT;
->
 
 with project begin
   with file e when nameContains ".elm" and { -1 === e.path().indexOf("elm-stuff") } begin
     do e.setPath newPath={ "src/" + e.name() }
   end
   with file when path = "elm-package.json"
-    with src_location
-      do set 'here' '"src"'
+    do regexpReplace '"\."' '"src"'
 end
 
 editor IndexHtml
