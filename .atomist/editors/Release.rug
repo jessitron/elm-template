@@ -1,6 +1,0 @@
-@tag "elm"
-@description "Add a release script"
-editor Release
-
-with project p
-   do merge "release.vm" to "release"

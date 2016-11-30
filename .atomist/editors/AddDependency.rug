@@ -17,6 +17,6 @@ with file f when name = "elm-package.json" and { -1 === f.content().indexOf(depe
   with dep d
    do set 'here' {
       var computedRange = dependency_version
-      var computedThing = '"' + dependency_name + '": "' + computedRange + '",\n'
-      return computedThing + "        "
+      var computedThing = '"' + dependency_name + '": "' + computedRange + '",'
+      return computedThing
    }
