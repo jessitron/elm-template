@@ -7,16 +7,7 @@ param dependency_name: .*
 
 param dependency_version: .*
 
+let dependencies = $(/[name='elm-package.json']/->json/dependencies)
 
-let dep = <
-    PLACEHOLDER : [];
-    dep : '"dependencies":' '{' here=PLACEHOLDER;
->
-
-with file f when name = "elm-package.json" and { -1 === f.content().indexOf(dependency_name) }
-  with dep d
-   do set 'here' {
-      var computedRange = dependency_version
-      var computedThing = '"' + dependency_name + '": "' + computedRange + '",'
-      return computedThing
-   }
+with dependencies
+ do addKeyValue dependency_name dependency_version
