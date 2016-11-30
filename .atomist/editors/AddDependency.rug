@@ -2,12 +2,18 @@
 @tag "elm"
 editor AddDependency
 
-
 param dependency_name: .*
 
 param dependency_version: .*
 
-let dependencies = $(/[name='elm-package.json']/->json/dependencies)
+let old_thinger={ return "\"dependencies\": "; }
+let new_thinger={
+    return "\"dependencies\": \n        \"" +
+     dependency_name +
+     "\" : \"" +
+     dependency_version + "\"";
+   }
 
-with dependencies
- do addKeyValue dependency_name dependency_version
+with project
+  with file when path="elm-package.json"
+    do regexpReplace old_thinger new_thinger
