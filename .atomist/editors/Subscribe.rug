@@ -28,7 +28,7 @@ AddImport module="Main", module_to_import=namespace
 
 AddToModel field_name=name_of_content, field_type={ "Maybe " + type_of_content }, initial_value="Nothing"
 
-AddMessage constructor={ message + " ( Maybe " + type_of_content + " )" },
+AddMessage constructor={ message + " " + type_of_content },
            deconstructor={ message + " " + name_of_content },
            update_model={ return ('{ model | ' + name_of_content + " = Just " + name_of_content + ' }') }
 
