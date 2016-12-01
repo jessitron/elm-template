@@ -53,5 +53,6 @@ AddImportExposure containing_module="Main", imported_module="Html", new_exposure
 
 with file f when path="src/Main.elm" begin
     do replace "main : Html Never" ""
+    do replace "Html Never" "Html Msg"
     do replace "main =" guts
 end
