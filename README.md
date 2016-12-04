@@ -29,6 +29,14 @@ Parameter:
 
 * project_name: populates the title in index.html
 
+### AddButton
+Have a function that returns a button element, complete with onClick event that comes back to your update function.
+
+Parameters:
+
+* button_text: text to display on the button, like "Push Me"
+* button_message: message to send on click, like `ButtonPushed`
+
 ### AddTextInput
 This makes five changes: a field in the model (and its type), a message (and its clause in update), and a function that you can call in your view.
 
