@@ -1,7 +1,7 @@
 {
     "group": "jessitron",
     "name": "elm-template",
-    "version": "0.2.1",
+    "version": "1.0.3",
     "description": "Elm Editors for use with Atomist Rug",
     "repository": {
         "type": "git",
