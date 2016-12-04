@@ -1,23 +1,24 @@
 {
-    "group": "atomist-rugs",
-    "name": "typescript-editors",
-    "version": "0.1.1",
-    "description": "Sample Editors for using with Atomist Rug",
+    "group": "jessitron",
+    "name": "elm-template",
+    "version": "0.2.1",
+    "description": "Elm Editors for use with Atomist Rug",
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/atomist/typescript-editors.git"
+        "url": "git+https://github.com/jessitron/elm-template.git"
     },
     "keywords": [
         "Atomist",
-        "Rug"
+        "Rug",
+        "Elm"
     ],
-    "author": "Atomist, Inc",
+    "author": "Jessica Kerr",
     "license": "Apache-2.0",
     "bugs": {
-        "url": "https://github.com/atomist/typescript-editors/issues"
+        "url": "https://github.com/jessitron/elm-template/issues"
     },
-    "homepage": "https://github.com/atomist/typescript-editors#readme",
+    "homepage": "https://github.com/jessitron/elm-template#readme",
     "dependencies": {
-        "@atomist/rug": "0.1.2"
+        "@atomist/rug": "0.4.2"
     }
 }

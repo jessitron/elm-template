@@ -1,9 +1,0 @@
-group: jessitron
-artifact: elm-template
-version: 1.0.1
-
-requires: "0.3.0-SNAPSHOT"
-
-dependencies:
-  
-extensions:
