@@ -1,5 +1,7 @@
 # Elm Generators and Editors for Rug
 
+:warning: Moved to https://github.com/jessitron/elm-rugs
+
 This repository contains scripts for starting and upgrading Elm programs. The scripts run in [Rug](http://docs.atomist.com/rug/why-and-what-is-rug/), a DSL and runtime for code that modifies code.
 
 To use these scripts:
